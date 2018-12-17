@@ -1,6 +1,9 @@
 #include <stdio.h>
 
-static int main() {
-
+int main() {
 	return 0;
+}
+
+typedef struct Token {
+	int id;
 }
