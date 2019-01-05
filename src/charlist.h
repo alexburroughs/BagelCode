@@ -2,12 +2,12 @@
 #define CHARLIST_H
 
 typedef struct nodeElement {
-	NodeElement *next;
+	struct nodeElement *next;
 	char c;
 } NodeElement;
 
 typedef struct charList {
-	NodeElement *head;
+	struct charList *head;
 	int size;
 } CharList;
 

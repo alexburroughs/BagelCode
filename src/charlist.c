@@ -4,7 +4,7 @@
 
 
 typedef struct nodeElement {
-	NodeElement *next;
+	struct nodeElement *next;
 	char c;
 } NodeElement;
 
@@ -117,7 +117,7 @@ void cl_add(CharList * list, char newVar) {
 	newElem->c = newVar;
 
 	if (list->size > 0) {
-		NodeElement *last = cl_getLastElem(list);
+		NodeElement *last = cl_getLastElement(list);
 		last->next = newVar;
 	}
 
@@ -139,7 +139,7 @@ void cl_add(CharList * list, char newVar) {
 void cl_deleteList(CharList * list) {
 
 	NodeElement *head = list->head;
-	NodeElement *curr;
+	NodeElement *curr = NULL;
 
 	while (head != NULL) {
 		if (head->next != NULL) {
