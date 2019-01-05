@@ -1,0 +1,14 @@
+main () -> num {
+
+	return 0;
+}
+
+doStuff() -> num{
+	num a;
+	str b;
+	
+	a = 12;
+	b = "hello";
+	
+	return a;
+}

@@ -1,5 +1,6 @@
 #include <stdlib.h>
-#include "charlist.h"
+#include "tokenlist.h"
+#include "token.h"
 
 
 //#ifndef NULL
@@ -7,7 +8,7 @@
 //#endif // !NULL
 
 
-/* cl_newList
+/* tl_newList
 *
 *  purpose: create a new list
 *
@@ -15,13 +16,13 @@
 *
 *  returns: a new list
 */
-CharList * cl_newList(void) {
-	CharList *new = (CharList *) malloc(sizeof(CharList));
+TokenList * tl_newList(void) {
+	TokenList *new = (TokenList *)malloc(sizeof(TokenList));
 	new->size = 0;
 	return new;
 }
 
-/* cl_getLastElement
+/* tl_getLastElement
 *
 *  purpose: get the last element in the list
 *
@@ -29,18 +30,18 @@ CharList * cl_newList(void) {
 *
 *  returns: the last element in the list
 */
-void cl_updateLastElement(CharList * list) {
+void tl_updateLastElement(TokenList * list) {
 
-	c_NodeElement *head = list->head;
+	t_NodeElement *head = list->head;
 
-	for (int i = 0 ; head->next != NULL; i++) {
+	for (int i = 0; head->next != NULL; i++) {
 		head = head->next;
 	}
 
 	list->curr = head;
 }
 
-/* cl_getElem
+/* tl_getElem
 *
 *  purpose: get an element in the list
 *
@@ -49,18 +50,18 @@ void cl_updateLastElement(CharList * list) {
 *
 *  returns: the element in the list at the position given
 */
-c_NodeElement * cl_getElem(CharList * list ,int pos) {
+t_NodeElement * tl_getElem(TokenList * list, int pos) {
 
-	c_NodeElement *head = list->head;
+	t_NodeElement *head = list->head;
 
 	for (int i = 0; i < pos; i++) {
 		head = head->next;
-	 }
+	}
 
 	return head;
 }
 
-/* cl_getNext
+/* tl_getNext
 *
 *  purpose: get the next element in the list
 *
@@ -68,13 +69,13 @@ c_NodeElement * cl_getElem(CharList * list ,int pos) {
 *
 *  returns: the next element in the list
 */
-c_NodeElement * cl_getNext(c_NodeElement * curr) {
-	c_NodeElement * next = curr->next;
+t_NodeElement * tl_getNext(t_NodeElement * curr) {
+	t_NodeElement * next = curr->next;
 
 	return next;
 }
 
-/* cl_updateLength
+/* tl_updateLength
 *
 *  purpose: update the length of the list
 *
@@ -82,31 +83,31 @@ c_NodeElement * cl_getNext(c_NodeElement * curr) {
 *
 *  returns: nothing
 */
-void cl_updateLength(CharList * list) {
+void tl_updateLength(TokenList * list) {
 
-	c_NodeElement *head = list->head;
+	t_NodeElement *head = list->head;
 
 	int i = 0;
 
-	for (; head != NULL; i++) { 
+	for (; head != NULL; i++) {
 		head = head->next;
 	}
 
 	list->size = i;
 }
 
-/* cl_add
+/* tl_add
 *
 *  purpose: add an element to the list
-* 
+*
 *  inputs: list: the list to add to
 *		   new: the element to be added
 *
 *  returns: nothing
 */
-void cl_add(CharList * list, char newVar) {
-	
-	c_NodeElement *newElem = (c_NodeElement *) malloc(sizeof(c_NodeElement));
+void tl_add(TokenList * list, token newVar) {
+
+	t_NodeElement *newElem = (t_NodeElement *)malloc(sizeof(t_NodeElement));
 	newElem->c = newVar;
 
 	if (list->size > 0) {
@@ -123,7 +124,7 @@ void cl_add(CharList * list, char newVar) {
 	list->size++;
 }
 
-/* cl_addArray
+/* tl_addArray
 *
 *  purpose: append an array to the end of a list
 *
@@ -133,12 +134,12 @@ void cl_add(CharList * list, char newVar) {
 *
 *  returns: nothing
 */
-void cl_addArray(CharList * list, char * arr, int numElem) {
+void tl_addArray(TokenList * list, token * arr, int numElem) {
 
-	c_NodeElement *curr = list->curr;
+	t_NodeElement *curr = list->curr;
 
 	for (int i = 0; i < numElem; i++) {
-		c_NodeElement *n = (c_NodeElement *) malloc(sizeof(c_NodeElement));
+		t_NodeElement *n = (t_NodeElement *)malloc(sizeof(t_NodeElement));
 		n->c = arr[i];
 
 		curr = n;
@@ -148,7 +149,7 @@ void cl_addArray(CharList * list, char * arr, int numElem) {
 	list->size += numElem;
 }
 
-/* cl_fromArray
+/* tl_fromArray
 *
 *  purpose: convert array to a list
 *
@@ -157,24 +158,24 @@ void cl_addArray(CharList * list, char * arr, int numElem) {
 *
 *  returns: nothing
 */
-CharList * cl_fromArray(char * arr, int numElem) {
+TokenList * tl_fromArray(token * arr, int numElem) {
 
-	CharList * list = malloc(sizeof(CharList));
+	TokenList * list = malloc(sizeof(TokenList));
 
 	if (numElem > 1) {
-		c_NodeElement *n = malloc(sizeof(c_NodeElement));
+		t_NodeElement *n = malloc(sizeof(t_NodeElement));
 		n->c = arr[0];
 		list->head = n;
 	}
 
 	for (int i = 1; i < numElem; i++) {
-		cl_add(list, arr[i]);
+		tl_add(list, arr[i]);
 	}
 
 	return list;
 }
 
-/* cl_deleteList
+/* tl_deleteList
 *
 *  purpose: free all the memory in a list
 *
@@ -182,10 +183,10 @@ CharList * cl_fromArray(char * arr, int numElem) {
 *
 *  returns: nothing
 */
-void cl_deleteList(CharList * list) {
+void tl_deleteList(TokenList * list) {
 
-	c_NodeElement *head = list->head;
-	c_NodeElement *curr = NULL;
+	t_NodeElement *head = list->head;
+	t_NodeElement *curr = NULL;
 
 	while (head != NULL) {
 		if (head->next != NULL) {
