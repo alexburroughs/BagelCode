@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #ifndef NULL
 #define NULL 0
 #endif // !NULL
@@ -22,7 +24,7 @@ typedef struct charList {
 *  returns: a new list
 */
 CharList * cl_newList(void) {
-	CharList *new = malloc(sizeof(CharList));
+	CharList *new = (CharList *) malloc(sizeof(CharList));
 	new->size = 0;
 
 	return new;
@@ -56,7 +58,7 @@ NodeElement * cl_getLastElement(CharList * list) {
 *
 *  returns: the element in the list at the position given
 */
-char cl_getElem(CharList * list ,int pos) {
+NodeElement * cl_getElem(CharList * list ,int pos) {
 
 	NodeElement *head = list->head;
 
@@ -64,7 +66,7 @@ char cl_getElem(CharList * list ,int pos) {
 		head = head->next;
 	 }
 
-	return head->c;
+	return head;
 }
 
 /* cl_getNext
@@ -113,12 +115,12 @@ void cl_updateLength(CharList * list) {
 */
 void cl_add(CharList * list, char newVar) {
 	
-	NodeElement *newElem = malloc(sizeof(NodeElement));
+	NodeElement *newElem = (NodeElement *) malloc(sizeof(NodeElement));
 	newElem->c = newVar;
 
 	if (list->size > 0) {
 		NodeElement *last = cl_getLastElement(list);
-		last->next = newVar;
+		last->next = newElem;
 	}
 
 	else {
