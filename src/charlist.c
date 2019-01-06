@@ -155,7 +155,7 @@ void cl_addArray(CharList * list, char * arr, int numElem) {
 *  inputs: arr: the array to create from
 *		   numElem: the amount of elements to add
 *
-*  returns: nothing
+*  returns: CharList
 */
 CharList * cl_fromArray(char * arr, int numElem) {
 
@@ -169,6 +169,28 @@ CharList * cl_fromArray(char * arr, int numElem) {
 
 	for (int i = 1; i < numElem; i++) {
 		cl_add(list, arr[i]);
+	}
+
+	return list;
+}
+
+/* cl_fromLink
+*
+*  purpose: splice a list
+*
+*  inputs: arr: the list to splice
+*		   numElem: the amount of elements to splice
+*
+*  returns: CharList
+*/
+CharList * cl_fromLink(c_NodeElement * elem, int numElem) {
+
+	CharList * list = malloc(sizeof(CharList));
+	c_NodeElement *n = malloc(sizeof(c_NodeElement));
+
+	for (int i = 0; i < numElem; i++) {
+		cl_add(list, n->c);
+		n = n->next;
 	}
 
 	return list;

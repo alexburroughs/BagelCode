@@ -18,5 +18,7 @@ c_NodeElement * cl_getElem(CharList * list, int pos);
 c_NodeElement * cl_getNext(c_NodeElement * curr);
 void cl_updateLength(CharList * list);
 void cl_add(CharList * list, char newVar);
+CharList * cl_fromArray(char * arr, int numElem);
+CharList * cl_fromLink(c_NodeElement * elem, int numElem);
 void cl_deleteList(CharList * list);
 #endif

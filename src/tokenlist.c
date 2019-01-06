@@ -105,7 +105,7 @@ void tl_updateLength(TokenList * list) {
 *
 *  returns: nothing
 */
-void tl_add(TokenList * list, token newVar) {
+void tl_add(TokenList * list, token *newVar) {
 
 	t_NodeElement *newElem = (t_NodeElement *)malloc(sizeof(t_NodeElement));
 	newElem->c = newVar;
@@ -134,7 +134,7 @@ void tl_add(TokenList * list, token newVar) {
 *
 *  returns: nothing
 */
-void tl_addArray(TokenList * list, token * arr, int numElem) {
+/*void tl_addArray(TokenList * list, token * arr, int numElem) {
 
 	t_NodeElement *curr = list->curr;
 
@@ -147,7 +147,7 @@ void tl_addArray(TokenList * list, token * arr, int numElem) {
 
 	list->curr = curr;
 	list->size += numElem;
-}
+}*/
 
 /* tl_fromArray
 *
@@ -158,7 +158,7 @@ void tl_addArray(TokenList * list, token * arr, int numElem) {
 *
 *  returns: nothing
 */
-TokenList * tl_fromArray(token * arr, int numElem) {
+/*TokenList * tl_fromArray(token * arr, int numElem) {
 
 	TokenList * list = malloc(sizeof(TokenList));
 
@@ -173,7 +173,7 @@ TokenList * tl_fromArray(token * arr, int numElem) {
 	}
 
 	return list;
-}
+}*/
 
 /* tl_deleteList
 *

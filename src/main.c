@@ -7,6 +7,7 @@
 #include "tokenizer.h"
 #include "token.h"
 #include "charlist.h"
+#include "tokenlist.h"
 
 CharList * readFile(char *filename) {
 
@@ -28,6 +29,8 @@ CharList * readFile(char *filename) {
 		cl_add(list, curr);
 	}
 
+	cl_add(list, EOF);
+
 	fclose(fp);
 
 	return list;
@@ -43,6 +46,9 @@ int main() {
 		printf("%c", n->c);
 		
 	}
+
+	
+
 	int c;
 	c = getchar();
 
