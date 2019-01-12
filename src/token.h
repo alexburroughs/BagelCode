@@ -15,14 +15,15 @@ typedef enum identifier {
 	STR,
 	CHR,
 	PNT,
-	DEREF,
-	ADDR,
+	STAR, //done
+	ADDR, //done
+	RET,
 	FN,
 	ARROW,
-	LEFT_BLOCK,
-	RIGHT_BLOCK,
-	LEFT_BRACKET,
-	RIGHT_BRACKET,
+	LEFT_BLOCK, //done
+	RIGHT_BLOCK, //done
+	LEFT_BRACKET, //done
+	RIGHT_BRACKET, //done
 	STRUCT,
 	ENUM,
 	DOT,
@@ -32,28 +33,33 @@ typedef enum identifier {
 	ELIF,
 	FOR,
 	WHILE,
+	LOOP,
 	CONTINUE,
+	BREAK,
 	GOTO,
-	ADD,
-	SUB,
-	MUL,
-	DIV,
-	MOD,
-	ASSIGN,
-	EQUAL,
-	GREATER,
-	LESS,
-	GREATER_EQ,
-	LESS_EQ,
-	AND,
-	OR,
-	NOT,
-	NOT_EQ,
-	FUNCTION,
+	ADD, //done
+	ADD_EQ, //done
+	SUB, //done
+	SUB_EQ, //done
+	STAR_EQ, //done
+	DIV, //done
+	DIV_EQ, //done
+	MOD, //done
+	MOD_EQ, //done
+	ASSIGN, //done
+	EQUAL, //done
+	GREATER, //done
+	LESS, //done
+	GREATER_EQ, //done
+	LESS_EQ, //done
+	AND, //done
+	OR, //done
+	NOT, //done
+	NOT_EQ, //done
 	NAME,
 	NUMBER,
 	STRING,
-	SEMICOLON
+	SEMICOLON //done
 
 } Identifier;
 
