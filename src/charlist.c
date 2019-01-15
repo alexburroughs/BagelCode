@@ -148,6 +148,62 @@ void cl_addArray(CharList * list, char * arr, int numElem) {
 	list->size += numElem;
 }
 
+/* cl_match
+*
+*  purpose: check if an array matches a part of a list
+*
+*  inputs: node: the node to start matching from
+*          arr: the array to match
+*		   count: the number of elements to match
+*
+*  returns: int (1 or 0)
+*/
+int cl_match(c_NodeElement* node, char* arr, int count) {
+
+	int i = 0;
+
+	while (i < count) {
+
+		if (node == NULL) {
+			return 0;
+		}
+
+		if (node->c != arr[i]) {
+			return 0;
+		}
+		node = node->next;
+		++i;
+	}
+
+	return 1;
+}
+
+/* cl_findNext
+*
+*  purpose: find the next occurance of a symbol
+*
+*  inputs: node: the node to start looking from
+*          elem: the symbol to 
+*
+*  returns: int (how many places until the symbol is found)
+*/
+int cl_findNext(c_NodeElement* node, char elem) {
+
+	int i = 0;
+
+	while (node->c != elem) {
+
+		if (node == NULL) {
+			return i-1;
+		}
+
+		node = node->next;
+		++i;
+	}
+
+	return i;
+}
+
 /* cl_fromArray
 *
 *  purpose: convert array to a list

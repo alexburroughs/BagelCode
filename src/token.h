@@ -11,32 +11,32 @@ typedef enum Type {
 } type;
 
 typedef enum identifier {
-	NUM,
-	STR,
-	CHR,
-	PNT,
+	NUM, //done
+	STR, //done
+	CHR, //done
+	PNT, //done
 	STAR, //done
 	ADDR, //done
-	RET,
-	FN,
-	ARROW,
+	RET, //done
+	FN, //done
+	ARROW, //done
 	LEFT_BLOCK, //done
 	RIGHT_BLOCK, //done
 	LEFT_BRACKET, //done
 	RIGHT_BRACKET, //done
-	STRUCT,
-	ENUM,
-	DOT,
-	COMMA,
-	IF,
-	ELSE,
-	ELIF,
-	FOR,
-	WHILE,
-	LOOP,
-	CONTINUE,
-	BREAK,
-	GOTO,
+	STRUCT, //done
+	ENUM, //done
+	DOT, //done
+	COMMA, //done
+	IF, //done
+	ELSE, //done
+	ELIF, //done
+	FOR, //done
+	WHILE, //done
+	LOOP, //done
+	CONTINUE, //done
+	BREAK, //done
+	GOTO, //done
 	ADD, //done
 	ADD_EQ, //done
 	SUB, //done
@@ -57,8 +57,8 @@ typedef enum identifier {
 	NOT, //done
 	NOT_EQ, //done
 	NAME,
-	NUMBER,
-	STRING,
+	NUMBER, //done
+	STRING, //done
 	SEMICOLON //done
 
 } Identifier;
