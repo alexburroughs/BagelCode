@@ -1,9 +1,9 @@
-main () -> num {
+fn main () -> num {
 
 	return 0;
 }
 
-doStuff() -> num{
+fn doStuff() -> num{
 	num a;
 	str b;
 	
