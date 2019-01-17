@@ -16,6 +16,15 @@
 #include "stdlib.h"
 
 
+/* advance
+*
+*  purpose: advance
+*
+*  inputs: list: the list to look at
+*		   new: the number of elements to advance in the list
+*
+*  returns: the element after advancing
+*/
 c_NodeElement * advance(c_NodeElement *n, int num) {
 
 	for (int i = 0; i < num; i++) {
@@ -26,7 +35,13 @@ c_NodeElement * advance(c_NodeElement *n, int num) {
 }
 
 /* peek
-* 
+*
+*  purpose: look at an element in the list
+*
+*  inputs: list: the list to look at
+*		   new: the number of elements to look forward in the list
+*
+*  returns: the element to be peeked at
 */
 char peek(c_NodeElement *n, int num) {
 
@@ -41,6 +56,15 @@ void error(int line, char *message) {
 
 }
 
+/* peek
+*
+*  purpose: look at an element in the list
+*
+*  inputs: list: the list to look at
+*		   new: the number of elements to look forward in the list
+*
+*  returns: the element to be peeked at
+*/
 TokenList * tokenize(CharList * list) {
 	
 	c_NodeElement *head = list->head;
@@ -53,9 +77,10 @@ TokenList * tokenize(CharList * list) {
 
 		token *t_tmp = malloc(sizeof(token));
 
+		// switch on the current character in the list
 		switch (head->c) {
 			
-			// equal
+			// check for all symbols
 			case '=':
 				switch (peek(head, 1)) {
 					case '=':
@@ -234,6 +259,8 @@ TokenList * tokenize(CharList * list) {
 				t_tmp->identifier = COMMA;
 				DEFAULT_ASSIGN(1)
 				break;
+
+			// check for strings
 			case '"': 
 			{
 				c_NodeElement *tmp = head;
@@ -251,15 +278,17 @@ TokenList * tokenize(CharList * list) {
 			 }
 			break;
 			default:
+
+				// skip all whitespace
 				if (IS_WHITESPACE(head->c)) {
 					advance(head, 1);
 					free(t_tmp);
 					continue;
 				}
 
+				// check for all letter keywords
 				if (IS_LETTER(head->c)) {
 					
-					// Check for if
 					if (cl_match(head, "if", 2)) {
 						t_tmp->identifier = IF;
 						DEFAULT_ASSIGN(2)
@@ -345,6 +374,7 @@ TokenList * tokenize(CharList * list) {
 						DEFAULT_ASSIGN(3)
 					}
 
+					// check for identifiers
 					else {
 
 						c_NodeElement *tmp = head;
@@ -361,6 +391,7 @@ TokenList * tokenize(CharList * list) {
 
 				}
 
+				// check for numbers
 				else if (IS_NUMBER(head->c)) {
 					
 					int count = 1;
