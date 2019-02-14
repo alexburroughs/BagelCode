@@ -19,7 +19,6 @@ t_NodeElement * tl_getElem(TokenList * list, int pos);
 t_NodeElement * tl_getNext(t_NodeElement * curr);
 void tl_updateLength(TokenList * list);
 void tl_add(TokenList * list, token *newVar);
-int cl_match(c_NodeElement *node, char *arr, int count);
-int cl_findNext(c_NodeElement* node, char elem);
 void tl_deleteList(TokenList * list);
+void tl_printList(TokenList * list);
 #endif

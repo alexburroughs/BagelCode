@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "charlist.h"
+#include <stdio.h>
 
 
 //#ifndef NULL
@@ -115,11 +116,12 @@ void cl_add(CharList * list, char newVar) {
 
 	else {
 		list->head = newElem;
-		list->curr = newElem;
+		//list->curr = newElem;
 	}
 
 	list->curr = newElem;
-
+	//printf("%s\n", "here");
+	//printf("%c\n", (char*)newElem->c);
 	list->size++;
 }
 
@@ -241,15 +243,37 @@ CharList * cl_fromArray(char * arr, int numElem) {
 */
 CharList * cl_fromLink(c_NodeElement * elem, int numElem) {
 
-	CharList * list = malloc(sizeof(CharList));
-	c_NodeElement *n = malloc(sizeof(c_NodeElement));
+	CharList * list = cl_newList();
+	//c_NodeElement *n = malloc(sizeof(c_NodeElement));
+
 
 	for (int i = 0; i < numElem; i++) {
-		cl_add(list, n->c);
-		n = n->next;
+		cl_add(list, elem->c);
+		elem = elem->next;
 	}
 
 	return list;
+}
+
+/* cl_toArray
+*
+*  inputs: list: The list to convert
+*
+*  purpose: convert a list of character to an array of chars
+*
+*  returns: array of characters
+*/
+char * cl_toArray(CharList *list) {
+
+	char *ret = malloc(sizeof(char) * list->size);
+	c_NodeElement *curr = list->head;
+
+	for (int i = 0; i < list->size; i++) {
+		ret[i] = curr->c;
+		curr = curr->next;
+	}
+
+	return ret;
 }
 
 /* cl_deleteList

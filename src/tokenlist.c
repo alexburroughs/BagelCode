@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "tokenlist.h"
 #include "token.h"
 
@@ -53,7 +54,6 @@ void tl_updateLastElement(TokenList * list) {
 t_NodeElement * tl_getElem(TokenList * list, int pos) {
 
 	t_NodeElement *head = list->head;
-
 	for (int i = 0; i < pos; i++) {
 		head = head->next;
 	}
@@ -124,56 +124,32 @@ void tl_add(TokenList * list, token *newVar) {
 	list->size++;
 }
 
-/* tl_addArray
+/* tl_printList
 *
-*  purpose: append an array to the end of a list
+*  purpose: print each token in a list
 *
-*  inputs: list: the list to append to
-*		   arr: the array to append
-*		   numElem: the amount of elements to append
+*  inputs: list: the list to print
 *
 *  returns: nothing
 */
-/*void tl_addArray(TokenList * list, token * arr, int numElem) {
+void tl_printList(TokenList * list) {
 
-	t_NodeElement *curr = list->curr;
-
-	for (int i = 0; i < numElem; i++) {
-		t_NodeElement *n = (t_NodeElement *)malloc(sizeof(t_NodeElement));
-		n->c = arr[i];
-
-		curr = n;
+	t_NodeElement *curr = list->head;
+	printf("%s%d\n", "Tokens: ", list->size);
+	while (curr != NULL) {
+		
+		token *tok = curr->c;
+		printf("line: %d ", tok->line);
+		CharList *listc = tok->text;
+		c_NodeElement *c = listc->head;
+		while (c != NULL) {
+			printf("Token: %c", (char*)c->c);
+			c = c->next;
+		}
+		
+		curr = curr->next;
 	}
-
-	list->curr = curr;
-	list->size += numElem;
-}*/
-
-/* tl_fromArray
-*
-*  purpose: convert array to a list
-*
-*  inputs: arr: the array to create from
-*		   numElem: the amount of elements to add
-*
-*  returns: nothing
-*/
-/*TokenList * tl_fromArray(token * arr, int numElem) {
-
-	TokenList * list = malloc(sizeof(TokenList));
-
-	if (numElem > 1) {
-		t_NodeElement *n = malloc(sizeof(t_NodeElement));
-		n->c = arr[0];
-		list->head = n;
-	}
-
-	for (int i = 1; i < numElem; i++) {
-		tl_add(list, arr[i]);
-	}
-
-	return list;
-}*/
+}
 
 /* tl_deleteList
 *
@@ -192,7 +168,8 @@ void tl_deleteList(TokenList * list) {
 		if (head->next != NULL) {
 			curr = head->next;
 		}
-
+		
+		free(head);
 		free(head);
 		head = curr;
 	}

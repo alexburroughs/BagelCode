@@ -36,9 +36,15 @@ CharList * readFile(char *filename) {
 	return list;
 }
 
-int main() {
+int main(int argc, char** argv) {
+	
+	printf("%s\n","aaaaaaa");
+	if (argc != 2) {
+		printf("Error: Incorrect amount of arguments");
+	}
+	CharList * list = readFile(argv[1]);
+	printf("read file\n");
 
-	CharList * list = readFile("C:/Users/Alex/Documents/C/BagelCode/code/test.bc");
 	c_NodeElement *n;
 
 	for (int i = 1; i < list->size; i++){
@@ -47,10 +53,9 @@ int main() {
 		
 	}
 
-	
-
-	int c;
-	c = getchar();
+	TokenList *tokenList = tokenize(list);
+	printf("%s\n", "tokenized");
+	tl_printList(tokenList);
 
 	return 0;
 }

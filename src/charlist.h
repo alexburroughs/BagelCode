@@ -21,4 +21,7 @@ void cl_add(CharList * list, char newVar);
 CharList * cl_fromArray(char * arr, int numElem);
 CharList * cl_fromLink(c_NodeElement * elem, int numElem);
 void cl_deleteList(CharList * list);
+char * cl_toArray(CharList *list);
+int cl_findNext(c_NodeElement *node, char elem);
+int cl_match(c_NodeElement * node, char * arr, int count);
 #endif

@@ -4,16 +4,17 @@
 * looks for keywords (token.h)
 */
 
-#define DEFAULT_ASSIGN(x) t_tmp->id = id; t_tmp->line = line; id++; t_tmp->text = cl_fromLink(head, x); advance(head, x);
+#define DEFAULT_ASSIGN(x) t_tmp->id = id; t_tmp->line = line; id++; printf("%s\n", "we here bois"); t_tmp->text = cl_fromLink(head, x); head = advance(head, x); tl_add(t_list, t_tmp); printf("%s\n", "added");
 #define IS_LETTER(x) ((x >= 'a' && x <= 'z') || x >= 'A' && x <= 'Z')
 #define IS_NUMBER(x) (x >= '0' && x <= '9')
 #define IS_ID_SYM(x) (x == '-' || x == '_')
-#define IS_WHITESPACE(x) (x == ' ' || x == '\n')
+#define IS_WHITESPACE(x) (x == ' ' || x == '\n' || x == '\t')
 
 #include "token.h"
 #include "tokenlist.h"
 #include "charlist.h"
 #include "stdlib.h"
+#include <stdio.h>
 
 
 /* advance
@@ -27,6 +28,7 @@
 */
 c_NodeElement * advance(c_NodeElement *n, int num) {
 
+	printf("%s%d\n", "advancing", num);
 	for (int i = 0; i < num; i++) {
 		n = n->next;
 	}
@@ -72,14 +74,18 @@ TokenList * tokenize(CharList * list) {
 
 	int line = 0;
 	int id = 0;
-
-	for (int i = 0; i < list->size; i++) {
-
+	
+	head = list->head;
+	int i = 0;
+	int done = 0;
+	while (!done) {
+		printf("char: %c\n", (char*)head->c);
 		token *t_tmp = malloc(sizeof(token));
-
+		printf("%c\n", (char*)head->c);
 		// switch on the current character in the list
-		switch (head->c) {
-			
+		
+		printf("%s\n", "hmmmmmmmmmmmm");
+		switch (head->c) {			
 			// check for all symbols
 			case '=':
 				switch (peek(head, 1)) {
@@ -209,7 +215,7 @@ TokenList * tokenize(CharList * list) {
 					break;
 				case '/':
 					free(t_tmp);
-					advance(head, cl_findNext(head, '\n') + 1);
+					head = advance(head, cl_findNext(head, '\n') + 1);
 					break;
 
 				default:
@@ -281,7 +287,8 @@ TokenList * tokenize(CharList * list) {
 
 				// skip all whitespace
 				if (IS_WHITESPACE(head->c)) {
-					advance(head, 1);
+					printf("%s\n", "whitespace");
+					head = advance(head, 1);
 					free(t_tmp);
 					continue;
 				}
@@ -289,7 +296,9 @@ TokenList * tokenize(CharList * list) {
 				// check for all letter keywords
 				if (IS_LETTER(head->c)) {
 					
+					printf("%c\n", (char*)head->c);	
 					if (cl_match(head, "if", 2)) {
+						printf("%s\n", "ok");
 						t_tmp->identifier = IF;
 						DEFAULT_ASSIGN(2)
 					}
@@ -348,7 +357,6 @@ TokenList * tokenize(CharList * list) {
 						t_tmp->identifier = RET;
 						DEFAULT_ASSIGN(6)
 					}
-
 					else if (cl_match(head, "fn", 2)) {
 						t_tmp->identifier = FN;
 						DEFAULT_ASSIGN(2)
@@ -378,7 +386,7 @@ TokenList * tokenize(CharList * list) {
 					else {
 
 						c_NodeElement *tmp = head;
-						int count = 1;
+						int count = 0;
 						while (IS_LETTER(tmp->c) || IS_NUMBER(tmp->c) || IS_ID_SYM(tmp->c)) {
 
 							++count;
@@ -404,6 +412,10 @@ TokenList * tokenize(CharList * list) {
 
 					t_tmp->identifier = NUMBER;
 					DEFAULT_ASSIGN(count);
+				}
+				else {
+					done = 1;
+					printf("end: %c\n", (char*)head->c);
 				}
 				break;
 		}
