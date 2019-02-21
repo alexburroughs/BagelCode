@@ -4,7 +4,7 @@
 * looks for keywords (token.h)
 */
 
-#define DEFAULT_ASSIGN(x) t_tmp->id = id; t_tmp->line = line; id++; printf("%s\n", "we here bois"); t_tmp->text = cl_fromLink(head, x); head = advance(head, x); tl_add(t_list, t_tmp); printf("%s\n", "added");
+#define DEFAULT_ASSIGN(x) t_tmp->id = id; t_tmp->line = line; id++;t_tmp->text = cl_fromLink(head, x); head = advance(head, x); tl_add(t_list, t_tmp); printf("%s\n", "added");
 #define IS_LETTER(x) ((x >= 'a' && x <= 'z') || x >= 'A' && x <= 'Z')
 #define IS_NUMBER(x) (x >= '0' && x <= '9')
 #define IS_ID_SYM(x) (x == '-' || x == '_')
@@ -82,9 +82,8 @@ TokenList * tokenize(CharList * list) {
 		printf("char: %c\n", (char*)head->c);
 		token *t_tmp = malloc(sizeof(token));
 		printf("%c\n", (char*)head->c);
+
 		// switch on the current character in the list
-		
-		printf("%s\n", "hmmmmmmmmmmmm");
 		switch (head->c) {			
 			// check for all symbols
 			case '=':
