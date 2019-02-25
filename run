@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gcc -std=c99 src/* -o bagel
+./bagel code/test.bc

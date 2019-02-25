@@ -45,14 +45,14 @@ int main(int argc, char** argv) {
 
 	c_NodeElement *n;
 
-	for (int i = 0; i < list->size -1; i++){
+	for (int i = 1; i < list->size; i++){
 		n = cl_getElem(list, i);
 		printf("%c", n->c);
 		
 	}
 
 	TokenList *tokenList = tokenize(list);
-	printf("tokenized\n");
+	printf("%s\n", "tokenized");
 	tl_printList(tokenList);
 
 	return 0;

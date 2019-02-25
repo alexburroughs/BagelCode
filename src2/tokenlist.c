@@ -142,14 +142,13 @@ void tl_printList(TokenList * list) {
 		CharList *listc = tok->text;
 		c_NodeElement *c = listc->head;
 		printf("\n");
-		for (int i = 0; i < listc->size; i++) {
+		while (c != NULL) {
 			printf("%c", c->c);
 			c = c->next;
 		}
 		
 		curr = curr->next;
 	}
-	printf("\n");
 }
 
 /* tl_deleteList
